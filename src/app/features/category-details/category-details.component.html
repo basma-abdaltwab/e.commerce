@@ -1,0 +1,75 @@
+
+
+<div class="bg-[#22c55e] text-white pt-12 pb-20 px-6 md:px-20 ">
+
+  <nav class="flex items-center gap-2 text-sm opacity-90 mb-8">
+    <a href="#" class="hover:underline">Home</a>
+    <span>/</span>
+    <a href="#" routerLink="/categories" class="hover:underline">Categories</a>
+    <span>/</span>
+    <span class="font-bold capitalize"> {{categoryDetails().name}} </span>
+  </nav>
+
+  <div class="flex items-center gap-6">
+    <div class="bg-white p-2 rounded-2xl w-20 h-20 flex items-center justify-center shadow-md">
+      <img [src]="categoryDetails().image" alt="Music" class="w-full h-full object-contain">
+    </div>
+    <div>
+      <h1 class="text-3xl sm:text-4xl text-white font-bold capitalize tracking-tight mb-2"> {{categoryDetails().name }} </h1>
+      <p class="text-lg opacity-90">Choose a subcategory to browse products</p>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-10 ">
+
+ @if (subDetails().length > 0) {
+   <button routerLink="/categories" class="inline-flex items-center gap-2  cursor-pointer hover:text-green-500 text-gray-600 hover:text-primary-600 transition-colors mb-6">
+    <i class="fa-solid fa-arrow-left"></i> Back to Categories
+  </button>
+
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold  text-gray-900">
+        {{ subDetails().length }} Subcategories in {{ categoryDetails().name}}
+     </h3>
+  </div>
+
+     
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (sub of subDetails(); track sub._id) {
+         <div [routerLink]="['/subcategory' , sub._id]" class="group bg-white cursor-pointer rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-xl hover:border-primary-200 transition-all duration-300 hover:-translate-y-1">
+      <div class="w-13 h-13 bg-[#f0fdf4] rounded-xl mb-4 group-hover:bg-green-100 flex items-center justify-center">
+        <i class="fa-solid fa-folder-open text-[#22c55e] text-2xl"></i>
+      </div>
+      <h3 class="font-bold text-gray-900 text-2xl group-hover:text-primary transition-colors mb-2">  {{ sub.name}} </h3>
+      <div class="flex items-center gap-2 text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span>Browse Products</span> <i class="fa solid fa-arrow-right"></i></div>
+    </div>
+ 
+    }
+
+  </div>
+ } @else {
+
+
+         <button routerLink="/categories" class="inline-flex items-center gap-2  cursor-pointer hover:text-green-500 text-gray-600 hover:text-primary-600 transition-colors mb-6">
+    <i class="fa-solid fa-arrow-left"></i> Back to Categories
+       </button>
+    
+    <div class="flex flex-col items-center justify-center py-20 text-center"> 
+
+    
+      <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+        <i class="fa-solid fa-folder-open text-gray-400 text-2xl"></i>
+      </div>
+      <h2 class="text-2xl font-semibold text-slate-900 mb-2">No Subcategories Found</h2>
+      <p class="text-slate-500 mb-8">This category doesn't have any subcategories yet.</p>
+      
+      <button class="bg-emerald-500 text-white px-4 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-colors shadow-md">
+        View All Products 
+      </button>
+    </div>
+
+  }
+  
+
+</div>

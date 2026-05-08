@@ -1,0 +1,6 @@
+
+
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  display: none !important;
+}

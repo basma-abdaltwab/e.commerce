@@ -1,0 +1,139 @@
+<section class="bg-linear-to-r from-[#22c55e] to-[#16a34a] py-14 px-6 relative overflow-hidden">
+  <div class="container mx-auto">
+    
+    <nav class="flex mb-6 text-sm text-white/80 space-x-2">
+      <span class="hover:text-white cursor-pointer transition-colors">Home</span>
+     
+      <span>/</span>
+      <span class="text-white font-semibold">All Products</span>
+    </nav>
+
+    <div class="flex items-center gap-5">
+      <div class="bg-white/15 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-lg">
+        <i class="fa-solid fa-box-open text-3xl text-white"></i>
+      </div>
+
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+          All Products
+        </h1>
+        <p class="text-white/90 text-lg mt-1 font-medium opacity-90">
+         Explore our complete product collection
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<section class="py-12">
+    <div class="container xl:w-[85%]">
+      <div class="title">
+        <h2 class=" text-gray-800 font-bold text-3xl">All <span class="text-emerald-600">Products</span></h2>
+      </div>
+      <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  xl:grid-cols-5 gap-4">
+      @for (product of productList()  | paginate: pagination   ; track product._id) {
+        <div
+          class="bg-white border border-gray-200 rounded-2xl p-4 shadow:sm hover:shadow-md transition-shadow duration-300 group font-sans"
+        >
+          <div class="relative overflow-hidden mb-4 p-4 ">
+            <img
+              [src]="product.imageCover"
+              alt="product"
+              class="w-full h-50 object-contain "
+            />
+                 <div class="absolute top-0 left-0">
+
+                     @if (product.priceAfterDiscount) {
+                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                {{ (product.price - product.priceAfterDiscount) / product.price | percent:'1.0-0' }} 
+               </span>
+                        }
+             </div>
+
+            <!--  ! ----------- Icons  Heart ! ----------- ....  -->
+            <div class="absolute top-0 right-0 flex flex-col gap-2">
+              <button
+                 aria-label="Add to wishlist"
+                class="w-10 h-10 cursor-pointer bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+              >
+                <i class="far fa-heart"></i>
+              </button>
+
+              <button
+              aria-label="Compare products"
+                class="w-10 h-10 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+              >
+                <i class="fas fa-sync-alt"></i>
+              </button>
+
+              <button
+
+              [routerLink]="['/details' , product.slug ,product._id]"
+              aria-label="Quick view"
+                
+                class="w-10 cursor-pointer h-10 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+              >
+                <i class="far fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <p class="text-xs text-gray-400 tracking-wide"> {{product.category.name}}</p>
+
+            <h3
+              class="text-lg font-medium text-slate-800 hover:text-emerald-600 cursor-pointer transition-colors"
+            >
+            {{product.title}}
+            </h3>
+
+            <div class="flex items-center gap-1">
+              <div class="flex text-yellow-400 cursor-pointer text-xs gap-0.5">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star text-gray-300"></i>
+              </div>
+              <span class="text-xs text-gray-400 font-medium">
+                {{product.ratingsAverage}} ({{product.ratingsQuantity}})</span
+              >
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <div class="flex flex-col">
+                <span class="text-lg font-bold text-slate-900"> {{product.price | currency: 'GBP' }} </span>
+              </div>
+
+              <button
+              (click)="addProductItemToCart(product._id)"
+              aria-label="Add product to cart"
+                class="w-10 h-10 cursor-pointer bg-emerald-600 text-white rounded-lg flex items-center justify-center hover:bg-emerald-700 transition-colors shadow-sm active:scale-95"
+              >
+                   <i class="fas fa-plus"></i> 
+              </button>
+            </div>
+          </div>
+        </div>
+
+      }
+      </div>
+
+      <div class=" my-pagination mt-4 flex flex-wrap justify-center">
+               <pagination-controls  id="foo"
+                      (pageChange)="pageChanged($event)"
+                     
+                      >
+             </pagination-controls>
+      </div>
+    </div>
+</section>

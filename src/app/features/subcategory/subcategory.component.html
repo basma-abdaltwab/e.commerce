@@ -1,0 +1,153 @@
+
+<section class="bg-[#f3f4f6] font-sans text-slate-700">
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-linear-to-r from-[#1db954] to-[#28c76f] px-4 py-8">
+      <div class="max-w-7xl mx-auto">
+        <div routerLink="/categories" class="text-white/80 text-sm mb-8 flex gap-3">
+          <span>Home</span><span>/</span><span class="cursor-pointer hover:text-green-400">Categories</span><span>/</span><span class="text-white font-semibold"> {{ SubCategDetails().name }}  </span>
+        </div>
+        <div class="flex items-center gap-7">
+          <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center shadow-lg">
+            <i class="fa-solid fa-folder-open text-white text-xl"></i>
+          </div>
+          <div>
+            <h1 class="text-white text-xl font-medium tracking-tight">  {{SubCategDetails().name}} </h1>
+            <p class="text-white/80 mt-2">Browse Computer Accessories products</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="max-w-7xl mx-auto px-16 py-10">
+      <div class="flex items-center gap-4 text-xl">
+        <i class="fa-solid fa-filter text-slate-500"></i>
+        <span class="font-medium">Active Filters:</span>
+        <span class="inline-flex items-center gap-3 cursor-pointer rounded-full bg-emerald-100 text-emerald-800 px-5 py-2 text-lg">
+          <i class="fa-solid fa-folder text-sm"></i>
+         {{ SubCategDetails().name }}
+          <i class="fa-solid fa-xmark"></i>
+        </span>
+        <button class="underline text-slate-600 cursor-pointer text-lg hover:text-slate-900">Clear all</button>
+      </div>
+
+      <p class="mt-10 text-lg text-gray-500">Showing {{ productList().length }} products</p>
+
+      <!-- Products -->
+
+        <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  xl:grid-cols-5 gap-4">
+
+      @for (product of productList(); track product._id) {
+
+        
+
+        <div
+          class="bg-white border border-gray-200 rounded-2xl p-4 shadow:sm hover:shadow-md transition-shadow duration-500 group font-sans"
+        >
+          <div class="relative overflow-hidden mb-4 p-4 ">
+            <img
+              [src]="product.imageCover"
+              alt="product"
+              class="w-full h-50 object-contain "
+            />
+                 <div class="absolute top-0 left-0">
+
+                     @if (product.priceAfterDiscount) {
+                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                {{ (product.price - product.priceAfterDiscount) / product.price | percent:'1.0-0' }} 
+               </span>
+                        }
+
+             </div>
+
+            <!--  ! ----------- Icons  Heart ! ----------- ....  -->
+            <div class="absolute top-0 right-0 flex flex-col gap-2">
+              <button 
+            
+                 aria-label="Add to wishlist"
+                 
+                class="w-10 h-10 cursor-pointer bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+              >
+                <i class="far fa-heart">
+                   
+                </i>
+              </button>
+
+              <button
+              aria-label="Compare products"
+                class="w-10 h-10 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+              >
+                <i class="fas fa-sync-alt"></i>
+              </button>
+
+              <button
+
+              [routerLink]="['/details' , product.slug ,product._id]"
+              aria-label="Quick view"
+                
+                class="w-10 cursor-pointer h-10 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+              >
+                <i class="far fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <p class="text-xs text-gray-400 tracking-wide"> {{product.category.name}}</p>
+            <h3
+              class="text-lg font-medium text-slate-800 hover:text-emerald-600 cursor-pointer transition-colors"
+            >
+            {{product.title}}
+            </h3>
+
+            <div class="flex items-center gap-1">
+              <div class="flex text-yellow-400 cursor-pointer text-xs gap-0.5">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star text-gray-300"></i>
+              </div>
+              <span class="text-xs text-gray-400 font-medium">
+                {{product.ratingsAverage}} ({{product.ratingsQuantity}})</span
+              >
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <div class="flex flex-col">
+                <span class="text-lg font-bold text-slate-900"> {{product.price | currency: 'GBP' }} </span>
+              </div>
+
+              <button
+              
+              aria-label="Add product to cart"
+                class="w-10 h-10 cursor-pointer bg-emerald-600 text-white rounded-lg flex items-center justify-center hover:bg-emerald-700 transition-colors shadow-sm active:scale-95"
+              >
+    
+                   <i class="fas fa-plus"></i> 
+                
+              </button>
+            </div>
+          </div>
+        </div>
+
+      }
+      </div>
+
+
+      <div class=" flex flex-col items-center justify-center text-center">
+        <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mb-8">
+          <i class="fa-solid fa-box-open text-gray-400 text-3xl"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-slate-900">No Products Found</h2>
+        <p class="mb-6 text-xl text-gray-500">No products match your current filters.</p>
+        <button routerLink="/shop"  class="mt-10 cursor-pointer bg-[#16a34a] hover:bg-[#15803d] text-white text-xl font-semibold px-4 py-3 rounded-2xl shadow">
+          View All Products
+        </button>
+      </div>
+
+
+    </section>
+  </div>
+</section>

@@ -1,0 +1,98 @@
+
+<div class="max-w-5xl mx-auto mt-10 p-6 bg-white border border-gray-100 rounded-lg shadow-xs font-sans text-slate-700">
+  
+  <!-- Tabs Navigation -->
+  <div class="flex border-b border-gray-200 mb-8">
+    <!-- <button class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors">
+      <i class="fa-solid fa-book-open text-xs"></i>
+      Product Details
+    </button> -->
+    <button class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-emerald-600 border-b-2 border-emerald-600 bg-emerald-50/30">
+      <i class="fa-solid fa-star text-xs"></i>
+      Reviews ( {{reviewDetails().length}} )
+    </button>
+    <!-- <button class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors">
+      <i class="fa-solid fa-truck-fast text-xs"></i>
+      Shipping & Returns
+    </button> -->
+  </div>
+
+  <!-- Reviews Content Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left Side: Big Rating -->
+    <div class="md:col-span-3 text-center py-4">
+      <h1 class="text-7xl font-bold text-slate-900 mb-2"> {{reviewDetails().length > 0 ? '4.5' : '0' }} </h1>
+      <div class="flex justify-center gap-1 text-amber-400 mb-2">
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+      </div>
+      <p class="text-sm text-gray-500 font-medium">Based on {{reviewDetails().length}} reviews</p>
+    </div>
+
+    <!-- Right Side: Progress Bars -->
+    <div class="md:col-span-9 space-y-4">
+      <!-- 5 Stars Row -->
+      <div class="flex items-center gap-4 text-sm">
+        <span class="w-10 text-gray-600">5 star</span>
+        <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-amber-400 rounded-full" [style.width.%]="calculatePercentage(5)"></div>
+        </div>
+        <span class="w-8 text-right text-gray-400">  {{ calculatePercentage(5) | number:'1.0-0' }}% </span>
+      </div>
+
+      <!-- 4 Stars Row -->
+      <div class="flex items-center gap-4 text-sm">
+        <span class="w-10 text-gray-600">4 star</span>
+        <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-amber-400 rounded-full" [style.width.%]="calculatePercentage(4)"></div>
+        </div>
+        <span class="w-8 text-right text-gray-400">{{ calculatePercentage(4) | number:'1.0-0' }}% </span>
+      </div>
+
+      <!-- 3 Stars Row -->
+      <div class="flex items-center gap-4 text-sm">
+        <span class="w-10 text-gray-600">3 star</span>
+        <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-amber-400 rounded-full" [style.width.%]="5"></div>
+        </div>
+        <span class="w-8 text-right text-gray-400">5%</span>
+      </div>
+
+      <!-- 2 Stars Row -->
+      <div class="flex items-center gap-4 text-sm">
+        <span class="w-10 text-gray-600">2 star</span>
+        <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-amber-400 rounded-full" [style.width.%]="5"></div>
+        </div>
+        <span class="w-8 text-right text-gray-400">5%</span>
+      </div>
+
+      <!-- 1 Star Row -->
+      <div class="flex items-center gap-4 text-sm">
+        <span class="w-10 text-gray-600">1 star</span>
+        <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-amber-400 rounded-full" [style.width.%]="5"></div>
+        </div>
+        <span class="w-8 text-right text-gray-400">25%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Section: Empty State -->
+  <div class="mt-16 text-center border-t border-gray-100 pt-10">
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4">
+        <i class="fa-solid fa-star text-gray-300 text-3xl"></i>
+    </div>
+    <p class="text-gray-500 mb-4">Customer reviews will be displayed here.</p>
+    <button class="text-emerald-600 font-semibold hover:underline cursor-pointer">
+        Write a Review
+    </button>
+  </div>
+
+
+ 
+</div>

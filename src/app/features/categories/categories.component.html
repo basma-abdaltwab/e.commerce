@@ -1,0 +1,45 @@
+
+
+<div class="bg-primary p-12 text-white">
+  <div class="flex items-center gap-2 text-sm text-gray-100">
+    <p class="font-light">Home</p>
+    <p class="font-light">/</p>
+    <p class="font-bold">Categories</p>
+  </div>
+
+  <div class="mt-6 flex items-center gap-5">
+    <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 p-2 shadow-inner">
+      <i class="fa-solid fa-layer-group text-3xl text-white"></i>
+    </div>
+    
+    <div>
+      <h1 class="text-3xl font-extrabold tracking-tight">All Categories</h1>
+      <p class="mt-1 text-sm text-gray-100 font-light">Browse our wide range of product categories</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 p-10">
+  
+  <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+
+   @for (category of categoryList(); track category._id) {
+     <div [routerLink]="['/category-details' , category.slug , category._id]" class="group cursor-pointer rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      
+     <div class="flex aspect-square items-center justify-center rounded-xl overflow-hidden mb-3 bg-gray-50 p-4">
+      <img  title="image" [src]="category.image" 
+           class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
+           [alt]="category.name" >
+    </div>
+
+      <div class="mt-4 text-center">
+        <h3 class="text-sm font-semibold text-gray-800 transition-colors group-hover:text-primary"> {{ category.name}} </h3>
+              <div class="flex justify-center mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity"><span class="text-xs text-green-500 flex items-center gap-1">View Products<i class="fa-solid fa-arrow-right-long"></i> </span></div>
+
+      </div>
+    </div>
+   }
+   
+
+    </div>
+</div>

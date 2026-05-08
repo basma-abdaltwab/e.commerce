@@ -1,0 +1,173 @@
+
+
+<!-- <div class="bg-[#f8f9fa] min-h-screen pb-20">
+  <div class="container mx-auto px-6 py-8 border-b border-gray-100 bg-white mb-10">
+    <nav class="flex text-[11px] font-black items-center space-x-2 text-gray-400 mb-5 uppercase tracking-wider">
+      <a href="#" class="hover:text-primary text-sm transition-colors">Home</a>
+      <span class=" hover:text-green-100 text-gray-300">/</span>
+      <span class="text-gray-900 font-medium">Wishlist</span>
+    </nav>
+    
+    <div class="flex items-center gap-5">
+      <div class="flex h-14 w-14 items-center justify-center bg-red-50 text-red-500 border border-red-100/50 rounded-lg">
+        <i class="fa-solid fa-heart text-xl"></i>
+      </div>
+      <div class="space-y-0">
+        <h1 class="text-2xl font-bold text-gray-900 tracking-tighter leading-tight">My Wishlist</h1>
+        <p class="text-sm text-gray-400 font-bold">1 item saved</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6">
+    <div class="bg-white rounded-sm border border-gray-100 shadow-sm overflow-hidden">
+      
+      <div class="grid grid-cols-[4fr_1fr_1fr_2fr] items-center text-[10px] font-[900] text-gray-400 uppercase tracking-[0.2em] bg-gray-50/80 px-8 py-4 border-b border-gray-100">
+        <span class="font-bold text-sm text-gray-600">Product</span>
+        <span class="text-center font-bold text-sm text-gray-600 ">Price</span>
+        <span class="text-center font-bold text-sm text-gray-600">Status</span>
+        <span class="text-center font-bold text-sm text-gray-600">Actions</span>
+      </div>
+
+      <div class="grid grid-cols-[4fr_1fr_1fr_2fr] items-center px-8 py-6 border-b border-gray-50 last:border-0">
+        
+        <div class="flex items-center gap-5">
+          <div class="h-15 w-15 flex-shrink-0 bg-white border border-gray-100 p-2 rounded-xl shadow-sm">
+            <img src="..." class="h-full w-full object-contain" alt="">
+          </div>
+          <div>
+            <h2 class="text-[15px] font-[800] text-gray-800 mb-0.5">Woman Shawl</h2>
+            <p class="text-[11px] font-medium text-gray-400">Women's Fashion</p>
+          </div>
+        </div>
+
+        <div class="text-xl font-bold text-gray-900 text-center tracking-tighter">349 EGP</div>
+
+        <div class="flex justify-center">
+          <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-600 text-[10px] font-medium px-3 py-1 rounded-full border border-green-100">
+            <span class="h-1 w-1 rounded-full bg-green-600"></span>
+            In Stock
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3 justify-center">
+          <button routerLink="/cart" class="flex items-center gap-2 bg-[#16ca76] text-white text-[14px] font-medium px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition-all">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Add to Cart
+          </button>
+          <button 
+          title="botton" class="flex h-11 w-11 items-center justify-center bg-white text-gray-300 border border-gray-100 rounded-lg hover:text-red-500 hover:border-red-100 transition-all">
+            <i class="fa-solid fa-trash-can text-base"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-8">
+      <a href="#" class="inline-flex items-center gap-2 text-lg font-medium text-gray-600 hover:text-primary transition-all">
+        <i class="fa-solid fa-arrow-left"></i>
+        CONTINUE SHOPPING
+      </a>
+    </div>
+
+  </div>
+</div> -->
+
+
+
+<div class="container mx-auto py-10 px-6 max-w-7xl">
+  
+  <nav class="flex items-center gap-2 text-sm mb-6 px-2">
+    <a href="#" class="text-gray-400 hover:text-green-600 transition-colors">Home</a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-gray-300"></i>
+    <span class="text-gray-800 font-semibold">Wishlist</span>
+  </nav>
+
+    <div class=" flex gap-4 items-center">
+       <div>
+      <i class="fa-solid fa-heart text-red-500"></i>
+    </div>
+        <div class="space-y-0">
+      <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">My Wishlist</h1>
+      <p class="text-gray-400 text-sm font-medium"> {{wishList().length}} items Saved</p>
+    </div>
+
+   
+    </div>
+</div>
+
+<div class="container mx-auto py-10 px-6">
+  
+  <div class=" hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-200 border-b border-gray-300 text-sm font-medium text-gray-500">
+    <div class="col-span-6">Product</div>
+    <div class="col-span-2 text-center">Price</div>
+    <div class="col-span-2 text-center">Status</div>
+    <div class="col-span-2 text-right">Actions</div>
+  </div>
+
+  <div class="bg-white border-x border-b border-gray-100 rounded-b-3xl divide-y divide-gray-50 shadow-sm">
+    
+   @for (item of wishList(); track item._id ) {
+      <div class="grid grid-cols-12 gap-4 px-8 py-6 items-center hover:bg-gray-50/30 transition-colors group">
+       <div class="col-span-6 flex items-center gap-6">
+        <div class="w-20 h-20 bg-gray-200 rounded p-2 flex items-center justify-center border border-gray-100 group-hover:scale-105 transition-transform">
+           <img [src]="item.imageCover" alt="product" class=" w-full h-full object-contain p-2">
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-800 text-lg mb-1 group-hover:text-green-600 transition-colors"> {{ item.slug }} </h3>
+          <p class="text-lg mt-1 text-gray-400 font-medium text-capitalize">  {{item.title}} </p>
+        </div>
+      </div>
+
+      <div class=" md:col-span-2 text-center font-semibold px-4 py-2.5  text-gray-900"> {{item.price}} EGP </div>
+
+      <div class="col-span-2 flex justify-center">
+
+        @if (addedToCartIds().includes(item._id)) {
+    <span class="bg-[#eefcf3] text-[#16a34a] px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 w-fit">
+      <i class="fa-solid fa-cart-shopping"></i>
+      In Cart
+    </span>
+  }
+       @else {
+        <span class="py-2 px-5 rounded-full text-[12px] font-bold bg-green-50 text-green-600 border border-green-100 capitalize">
+           In Stock
+          </span>
+       }
+        
+      </div>
+
+      <div class=" md:col-span-2 flex items-center justify-end gap-3">
+         
+                @if (addedToCartIds().includes(item._id)) {
+          <button 
+      routerLink="/cart" 
+      class="bg-gray-100 text-black   px-4 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all">
+      <i class="fa-solid fa-check"></i>
+      View Cart
+    </button>
+
+              }  @else {
+                   <button  
+         (click)="addProductItemToCart(item._id)"
+         class="bg-green-700 hover:bg-green-600 text-white px-4 py-2.5 cursor-pointer rounded-xl text-[12px]  flex items-center gap-2 shadow-lg shadow-green-100 transition-all active:scale-95">
+          <i class="fa-solid fa-cart-plus"></i> Add to Cart
+        </button>
+              }
+       
+        <button 
+        (click)="removeItemFromWishlist(item._id)"
+        title="btn" class="w-10 h-10 rounded-xl border cursor-pointer border-gray-100 text-gray-300 hover:text-red-500 hover:bg-red-300 transition-all">
+          <i class="fa-solid fa-trash-can text-sm"></i>
+        </button>
+      </div>
+
+    </div>
+   }
+
+    </div>
+
+       <div routerLink="/shop" class="mt-8 flex items-center justify-between"><a class="text-gray-500 hover:text-primary cursor-pointer text-lg font-medium transition-colors">← Continue Shopping</a></div>
+
+</div>

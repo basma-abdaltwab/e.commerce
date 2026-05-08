@@ -1,0 +1,127 @@
+
+ <!-- <div class="bg-primary p-12 text-white mb-10 rounded-b-[2rem] shadow-lg">
+  <div class="container mx-auto flex items-center gap-6">
+    <div class="flex h-15 w-15 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-inner border border-white/30">
+     {{brandDetails().slug}} </div>
+    
+    <div>
+      <h1 class="text-4xl font-black tracking-tighter">{{brandDetails().name}} </h1>
+      <p class="text-white/80 font-light mt-1">{{brandDetails().slug}} </p>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="bg-primary w-full py-16 text-white mb-6 shadow-md border-b-4 border-black/10">
+<div class="container mx-auto px-6 mb-6">
+  <nav class="flex items-center space-x-3 text-[14px] font-bold text-white/70  ">
+    <a href="#" class="hover:text-white  transition-colors">Home</a>
+    <span class="text-gray-300"><i class="fa-solid fa-chevron-right text-2xs"></i></span>
+    <a href="#" class="hover:text-white transition-colors">Brands</a>
+    <span class="text-gray-300"><i class="fa-solid fa-chevron-right text-2xs"></i></span>
+    <span class="text-white font-medium  tracking-tighter">{{brandDetails().slug}}</span>
+  </nav>
+</div>
+
+  <div class="container mx-auto px-6 flex items-center gap-10">
+    <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl ring-1 ring-white/30"><img alt="Lenovo" class="w-10 h-10 object-contain" [src]="brandDetails().image"></div>
+    
+    <div class="space-y-1">
+      <h1 class="text-white/80 mt-1 font-bold tracking-tight "> {{brandDetails().name}} </h1>
+      <p class="text-white/80 text-xl mt-1 uppercase "> Shop {{brandDetails().slug}} Products </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+    
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 text-gray-700 font-bold">
+        <i class="fa-solid fa-sliders text-primary"></i>
+        <span class="text-sm">Active Filters:</span>
+      </div>
+
+      <div class="flex items-center gap-2 bg-violet-100 text-violet-700 px-4 py-1.5 rounded-full  font-medium text-sm shadow-sm transition-colors hover:bg-violet-200 cursor-pointer">
+        <i class="fa-solid fa-tag text-xs"></i>
+        <span class="text-sm font-bold"> {{ brandDetails().name}}</span>
+        <button title="button" class=" transition-colors ml-1">
+          <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+      </div>
+
+      <button class="text-sm text-gray-500 hover:text-gray-700 underline">
+        Clear all
+      </button>
+
+         
+    </div>
+  </div>
+
+     <div class=" ms-2  mb-6 text-lg  text-gray-500">
+            Showing <span >{{ produts().length }}</span> products
+         </div>
+
+ <div class="container mx-auto px-4 pb-20">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+   @for (item of produts(); track item._id) {
+     <div class="group relative bg-white rounded-3xl border border-gray-100 p-4 shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+      
+      <span class="absolute top-4 left-4 z-20 rounded-lg bg-red-500 px-2 py-1 text-2xs font-bold text-white shadow-sm">
+        -100%
+      </span>
+
+      <div class="absolute top-4 right-4 z-20 flex flex-col gap-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+        <button title="btn" class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-400 shadow-md hover:text-red-500">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <button  title="btn" class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-400 shadow-md hover:text-primary">
+          <i class="fa-solid fa-arrows-rotate text-xs"></i>
+        </button>
+        <button title="btn" class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-400 shadow-md hover:text-primary">
+          <i class="fa-regular fa-eye text-xs"></i>
+        </button>
+      </div>
+
+      <div  class="relative aspect-square overflow-hidden rounded-2xl bg-gray-50/50 p-4">
+        <img title="img" [src]="item.imageCover" [alt]="item.slug" 
+             class="h-60 w-full object-contain transition-transform duration-700 group-hover:scale-110">
+      </div>
+
+      <div class="mt-4 space-y-2">
+        <div class="text-sm text-gray-500 mb-1">Electronics</div>
+        <p class=" font-medium cursor-pointer mb-1">{{ item.title.split(' ').slice(0, 8).join(' ')}} </p>
+        <h3 class="text-sm font-bold text-gray-800 line-clamp-2 min-h-10 leading-tight">
+          {{ brandDetails().name}}
+        </h3>
+
+        <div class="flex items-center gap-1">
+          <div class="flex text-2xs text-yellow-400">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <span class="text-2xs font-bold text-gray-500"> {{ item.ratingsAverage}} ({{item.ratingsQuantity}})</span>
+        </div>
+
+        <div class="flex items-center justify-between pt-2">
+          <div class="flex flex-col">
+            <span class="text-lg font-bold text-gray-800 ">{{item.price}} EGP</span>
+            
+          </div>
+          
+          <button title="button" class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 transition-transform active:scale-90">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+   }
+
+    </div>
+</div>
+
